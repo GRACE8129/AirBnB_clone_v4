@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- HEAD -->
+    <!--
+      Meta Information and Title:
+      - charset: Defines the character encoding for the document.
+      - viewport: Controls the layout on mobile browsers.
+      - title: The title of the webpage, displayed on the browser tab.
+    -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Holberton AirBnB</title>
+
+    <!-- FAVICON -->
+    <!--
+      Favicon:
+      - Provides a shortcut icon for the webpage.
+      - cache_id: Used to ensure the latest version of the icon is loaded.
+    -->
+    <link rel="shortcut icon" href="../static/images/icon.png?{{ cache_id }}">
+
+    <!-- CSS styles -->
+    <!--
+      CSS Stylesheets:
+      - Links to the external CSS files used for styling the webpage.
+      - cache_id: Used to ensure the latest version of the stylesheets is loaded.
+    -->
+    <link rel="stylesheet" href="../static/styles/4-common.css?{{ cache_id }}">
+    <link rel="stylesheet" href="../static/styles/3-header.css?{{ cache_id }}">
+    <link rel="stylesheet" href="../static/styles/3-footer.css?{{ cache_id }}">
+    <link rel="stylesheet" href="../static/styles/6-filters.css?{{ cache_id }}">
+    <link rel="stylesheet" href="../static/styles/8-places.css?{{ cache_id }}">
+    <link rel="stylesheet" href="../static/styles/font-awesome.css?{{ cache_id }}">
+
+    <!-- JavaScript -->
+    <!--
+      jQuery Library:
+      - Adds the jQuery library for easier JavaScript manipulation.
+      - Loaded from an external CDN.
+    -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <!--
+      Custom JavaScript:
+      - Links to the custom JavaScript file for additional functionality.
+      - cache_id: Used to ensure the latest version of the script is loaded.
+    -->
+    <script src="../static/scripts/4-hbnb.js?{{ cache_id }}"></script>
+  </head>
+
+  <!-- BODY -->
+  <body>
+
+    <!-- HEADER -->
+    <!--
+      Header Section:
+      - Contains the header content of the webpage.
+    -->
+    <header>
+      <div id="api_status"></div>
+    </header>
+
+    <main>
+      <div class="container">
+
+        <!-- FILTERS -->
+        <!--
+          Filters Section:
+          - Section for filtering the listings.
+        -->
+        <section class="filters">
+
+          <!-- LOCATIONS -->
+          <!--
+            Locations Filter:
+            - Filter options for states and cities.
+          -->
+          <div class="locations">
+            <h3>States</h3>
+            <h4>&nbsp;</h4>
+            <ul class="popover">
+              <!-- Loop through each state -->
+              <!--
+                states: A dictionary of states sorted by key.
+                state[0]: State name.
+                state[1].cities: List of cities in the state, sorted by city name.
+              -->
+              {% for state in states|dictsort %}
+              <h2>{{ state[0] }}</h2>
+              <ul>
+                {% for city in state[1].cities|sort(attribute='name') %}
+                <li>{{ city.name }}</li>
+                {% endfor %}
+              </ul>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <!-- AMENITIES -->
+          <!--
+            Amenities Filter:
+            - Filter options for amenities.
+          -->
+          <div class="amenities">
+            <h3>Amenities</h3>
+            <h4>&nbsp;</h4>
+            <ul class="popover">
+              <!-- Loop through each amenity -->
+              <!--
+                amens: List of amenities sorted by name.
+                amenity.id: The ID of the amenity.
+                amenity.name: The name of the amenity.
+              -->
+              {% for amenity in amens|sort(attribute='name') %}
+              <li>
+                <input type="checkbox" data-id="{{ amenity.id }}" data-name="{{ amenity.name }}">
+                {{ amenity.name }}
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <!-- SEARCH BUTTON -->
+          <!--
+            Search Button:
+            - Button for triggering search.
+          -->
+          <button>Search</button>
+        </section>
+
+        <section class="places">
+          <h1>Places</h1>
+
+          <!-- BEGIN 1 PLACE -->
+          <!--
+            Placeholder for individual place listing.
+          -->
+
+        </section>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <!--
+      Footer Section:
+      - Contains the footer content of the webpage.
+    -->
+    <footer>
+      Holberton School
+    </footer>
+  </body>
+</html>
